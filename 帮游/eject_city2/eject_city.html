@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0">
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/m_common.css"/>
+   	    <link type="text/css" rel="stylesheet" href="css/m_eject_city.css"/>
+		<title>00</title>
+	</head>
+	<body>
+		<input type="button" id="showBtn"  value="点击"/>
+		<div class="box">
+			<ul><li>出境游</li><li class="clicks" value="0">更多</li></ul>
+			<ul><li>国内游</li><li class="clicks" value="1">更多</li></ul>
+			<ul><li>周边游</li><li class="clicks" value="2">更多</li></ul>
+			<ul><li>主题游</li><li class="clicks" value="3">更多</li></ul>
+		</div>
+	</body>
+</html>
+<script src="js/eject_city.js"></script>
+<script>
+$(function () {
+	 var dest = new jQuery.dest({data:[{
+			//出境游
+			name: "出境游",
+			childs: [{
+				id: "1",
+				name: "出境游一级",
+				childs: [{
+					id: "2",
+					name: "出境List1"
+				}, {
+					id: "3",
+					name: "出境List2"
+				}, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				},
+				
+				 {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				 
+				, {
+					id: "3",
+					name: "出境List2"
+				}
+				, {
+					id: "3",
+					name: "出境List2"
+				}]
+			}, {
+				id: "10",
+				name: "出境游一级",
+				childs: [{
+					id: "11",
+					name: "出境List3"
+				}, {
+					id: "12",
+					name: "出境List4"
+				}]
+			}]
+		}, 
+			{
+			//国内游
+			name: "国内游",
+			childs: [{
+				id: "4",
+				name: "国内游一级",
+				childs: [{
+					id: "5",
+					name: "国内List"
+				}, {
+					id: "6",
+					name: "国内List"
+				}]
+			}, {
+				id: "10",
+				name: "国内游一级",
+				childs: [{
+					id: "11",
+					name: "国内List"
+				}, {
+					id: "12",
+					name: "国内List"
+				}]
+			}]
+		}, 
+			{
+			//周边游
+			name: "周边游",
+			childs: [{
+				id: "13",
+				name: "周边游一级",
+				childs: [{
+					id: "14",
+					name: "周边List"
+				}, {
+					id: "15",
+					name: "周边List"
+				}]
+			}]
+		}, 
+			{
+			//主题游
+			name: "主题游",
+			childs: [{
+				id: "16",
+				name: "主题游一级",
+				childs: [{
+					id: "17",
+					name: "主题List"
+				}, {
+					id: "18",
+					name: "主题List"
+				}]
+			}]
+		}],callback:function(dataArr){
+			for(var i=0;i<dataArr.length;i++){
+				console.log(" id:"+dataArr[i].id +  " name:" + dataArr[i].id)
+			}
+		}
+		
+	 });
+ $(".clicks").click(function(){
+		var vals =$(this).val();
+		
+		dest.show(false,vals);	
+ });
+
+
+});
+</script>

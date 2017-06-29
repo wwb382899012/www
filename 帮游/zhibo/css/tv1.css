@@ -1,0 +1,173 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {
+	margin:0;
+	padding:0
+
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0
+}
+fieldset,img {
+	border:0
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style:normal;
+	font-weight:normal
+}
+ol,ul {
+	list-style:none
+}
+caption,th {
+	text-align:left
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal
+}
+q:before,q:after {
+	content:''
+}
+abbr,acronym {
+	border:0;
+	font-variant:normal
+}
+sup {
+	vertical-align:text-top
+}
+sub {
+	vertical-align:text-bottom
+}
+input,textarea,select {
+	font-family:inherit;
+	font-size:inherit;
+	font-weight:inherit
+}
+input,textarea,select {
+	*font-size:100%
+}
+legend {
+	color:#000
+}
+body {
+	font:12px/1.5 arial,\5b8b\4f53,georgia,verdana,helvetica,sans-serif;
+	color:#444;
+	background:#1E1E1E
+}
+a {
+	color:#444;
+	text-decoration:none;
+	cursor:pointer
+}
+a:link {
+	color:#444
+}
+a:hover {
+	color:#389f0c
+}
+a:active {
+	color:#389f0c
+}
+.clearfix:after,#hd:after,#bd:after,#ft:after,.row:after {
+	display:block;
+	clear:both;
+	visibility:hidden;
+	height:0;
+	content:''
+}
+.clearfix,#hd,#bd,#ft,.row {
+	zoom:1
+}
+.le-playico {
+	overflow:hidden;
+	position:relative;
+	zoom:1
+}
+.le-playico:after,.le-playico .bgmask,.le-playico .bgplay {
+	visibility:hidden;
+	position:absolute;
+	overflow:hidden;
+	cursor:pointer
+}
+.le-playico:after {
+	z-index:2;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	content:'';
+	background:rgba(0,0,0,.3) url(http://p5.qhimg.com/d/_hao360/video/bgimg/btn.png) no-repeat center;
+	cursor:pointer
+}
+.le-playico:hover {
+	border-color:#fefefe
+}
+.le-playico .bgmask {
+	z-index:2;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	filter:alpha(opacity=30)
+}
+.le-playico .bgplay {
+	z-index:3;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:url(http://p5.qhimg.com/d/_hao360/video/bgimg/btn.png) center no-repeat;
+	_background:url(http://p9.qhimg.com/t010a371950db3bc0de.png) center no-repeat
+}
+.le-playico:hover:after,.le-playico:hover .bgmask,.le-playico:hover .bgplay {
+	visibility:visible
+}
+.le-hint {
+	position:relative
+}
+.le-hint .le-hint-time,.le-hint .le-hint-timebg {
+	position:absolute;
+	bottom:0;
+	right:0;
+	height:22px;
+	padding:0 6px;
+	line-height:22px
+}
+.le-hint .le-hint-time {
+	color:#fff
+}
+.le-hint .le-hint-timebg {
+	background:#000;
+	opacity:.6;
+	filter:alpha(opacity=60)
+}
+.le-hintbg {
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:22px;
+	background:#000;
+	opacity:.6;
+	filter:alpha(opacity=60)
+}
+.le-hint-center,.le-hint-right,.le-hint-left {
+	overflow:hidden;
+	position:absolute;
+	bottom:0;
+	height:22px;
+	color:#fff;
+	line-height:22px
+}
+.le-hint-center {
+	width:100%;
+	text-align:center
+}
+.le-hint-right {
+	right:0;
+	padding:0 5px
+}
+.le-hint-left {
+	left:0;
+	padding:0 5px
+}

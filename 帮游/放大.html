@@ -1,0 +1,28 @@
+<script type="text/javascript"> 
+        //兼容IE和火狐   缩小放大、缩放 
+        function ImageSuofang(args) { 
+            var oImg = document.getElementById("oImg"); 
+            if (args) { 
+			
+                oImg.width = oImg.width * 1.2; 
+                oImg.height = oImg.height * 1.2; 
+            } 
+            else { 
+                oImg.width = oImg.width / 1.1; 
+                oImg.height = oImg.height / 1.1; 
+            } 
+        }     
+     </script> 
+
+<form id="form1"> 
+
+     <div class="pancontainer" data-orient="center" style="width:320px; height:480px;margin: 5px 300px 0px 400px;border: 1px solid #000;"> 
+	<img id="oImg" src="4-1.jpg" alt="pic" style=""/> 
+</div> 
+
+             <input id="btn1" type="button" value="放大" onclick="ImageSuofang(true)" /> 
+        <input id="btn2" type="button" value="缩小" onclick="ImageSuofang(false)" /> 
+         <!--            <input type="button" value="<-Rotate逆时针" name="RotateL" id="RotateL" onclick="rotateRight('oImg',90);">  --> 
+
+             
+</form> 

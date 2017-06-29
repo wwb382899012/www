@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>孩子的世界</title>
+		<style>
+			*{ margin:0; padding: 0;}
+			html,body{ height: 100%; overflow: hidden;}
+			
+			/* music */
+			@-webkit-keyframes reverseRotataZ{
+			    0%{-webkit-transform: rotateZ(0deg);}
+			    100%{-webkit-transform: rotateZ(-360deg);}
+			}
+			@-webkit-keyframes rotataZ{
+			    0%{-webkit-transform: rotateZ(0deg);}
+			    100%{-webkit-transform: rotateZ(360deg);}
+			}
+			#musicControl { position:fixed;right:10px;top:20px;margin-top:0;display:inline-block;z-index:99999999}
+			#musicControl a { display:inline-block;width: 25px; height: 25px;overflow:hidden;background:url('img/mcbg.png') no-repeat;background-size:100%;}
+			#musicControl a audio{width:100%;height:56px; display: flex; justify-content: center;}
+			#musicControl a.stop { background-position:left bottom;}
+			#musicControl a.on { background-position:0px 1px;-webkit-animation: reverseRotataZ 1.2s linear infinite;}
+			#music_play_filter{width:100%;height:100%;overflow:hidden;position:fixed;top:0;left:0;z-index:99999998;}
+			
+			.bodyConcent{ height: 100%; transition: all 0.5s ease-in;}
+			.bodyConcent .page{ height: 100%; position: relative;display: flex;justify-content: center;align-items: center;}
+			.bodyConcent .page.page1{ background: url(img/photo1.jpg) center no-repeat; background-size: cover}
+			.bodyConcent .page.page2{ background: url(img/photo2.jpg) center no-repeat; background-size: cover}
+			.bodyConcent .page.page3{ background: url(img/photo3.jpg) center no-repeat; background-size: cover}
+			.bodyConcent .page.page4{ background: url(img/photo4.jpg) center no-repeat; background-size: cover}
+			.bodyConcent .page.page5{ background: url(img/photo5.jpg) center no-repeat; background-size: cover}
+			.bodyConcent .page.page6{ background: url(img/photo6.jpg) center no-repeat; background-size: cover}
+			.bodyConcent .page.page7{ background: url(img/photo7.jpg) center no-repeat; background-size: cover}
+			.conBox{ width:94%; margin-top: -24%; position: relative;}
+			.conBox .inputBox{ position: absolute;top: 30%;left: 23%;right: 25%; bottom: 6%;}
+   			.conBox img{ width: 100%; display: block; overflow: hidden;}
+   			.inputBox{ border-radius: 50%;}
+			.inputBox img{ width: 100%; display: block; border-radius: 50%; overflow: hidden;}
+			.page4Btn{ width: 37%;margin-top: 65%;height: 6%; opacity: 0;}
+			.pageTitle{ position: absolute; width: 80%; left: 10%; top: 5%;}
+			.pageTitle img{ width: 100%; display: block;}
+			.pageFoot{ width: 50%; position: absolute; 50%;left: 25%;bottom: 15%;}
+			.pageFoot img{ width: 100%; display: block;}
+			.GeneraBox{ width:72%; margin-top: -30%; position: relative;}
+			.GeneraBox .inputBox{ position: absolute;top: 30%;left: 23%;right: 25%; bottom: 6%;}
+   			.GeneraBox img{ width: 100%; display: block; overflow: hidden;}
+			.GenerationBtn{ width: 50%; position: absolute;left: 25%;bottom: 10%;}
+			.GenerationBtn img{ width: 100%; display: block;}
+			.GeneraFoot{ width: 90%; position: absolute; left: 5%;bottom: 3%; display: flex;}
+			.GeneraFoot img{ width: 100%; display: block;}
+			.GeneraFoot .GeneraText{ flex: 1; font-size: 14px;}
+			.GeneraFoot .GeneraText span{ width: 100%; display: block; text-align: center; color: #fff; font-weight: 500; opacity: 0.9; height: 22px; line-height: 22px; font-weight: bold; letter-spacing:3px;}
+			.GeneraFoot .weimaBox{ width: 26%;}
+			.GeneraFoot .weimaBox img{ width: 100%;}
+			.GeneraFoot .weimaBox .wemaText{ color: #fff; height: 30px; font-size: 12px; line-height: 30px; display:flex;justify-content: center; font-weight: bold;}
+			.GeneraFoot .weimaBox .wemaText span{ flex: 1; text-align: center;}
+			
+			.htmleaf-container{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; background:#66677c; display: none;}
+			.chipBox{ width: 100%; height: 500px;}
+			.inputBtnBox{ background:#fff; height: 40px; position:relative;}
+			#clipBtn ,#clipBtn1{ float: right; background: none; border:  none; font-size: 14px; width: 80px; height: 40px; line-height: 40px; text-align: center;}
+			#file , #file1{ position: absolute; left: 0;top:0; float: left; background: none; border:  none; font-size: 14px; width: 80px; height: 40px; line-height: 40px; text-align: center; opacity: 0;}
+			.fileJong{ float: left; background: none; border:  none; font-size: 14px; width: 80px; height: 40px; line-height: 40px; text-align: center;}
+			.chipHeader{ height: 40px; width: 100%; background: #fff; position: relative; text-align: center; line-height: 40px;}
+			.closeChip{ position: absolute; left: 0; top: 0; background: none; border:  none; font-size: 14px; width: 80px; height: 40px; line-height: 40px; text-align: center;}
+		
+			.conBoxXour { width: 44%; height: 180px;position: absolute; left: 20%;top: 14%;border-radius: 50%;}
+			.conBoxZour{ width: 44%; height: 180px;position: absolute; left: 20%;bottom: 6%;border-radius: 50%;}
+			.leftCb , .rightCb{ width: 30%; position: absolute;}
+			.leftCb{ left: -27%; top: 40%;}
+			.rightCb{ right: -29%; top: 40%;}
+			.cbBox img{ width: 100%;}
+			.vsPerson{ width: 100%; height: 100%; position: relative; z-index: 10; background: #fff; border-radius: 50%; border: 2px solid #000;overflow: hidden;}
+			.vsPerson img{ width: 100%; display: block;}
+			
+			#canvas{}
+		</style>
+	</head>
+	<body>
+		
+		<!--音乐播放器-->
+		<span id="musicControl">
+		        <a id="mc_play" class="on" onclick="play_music();">
+		            <audio id="musicfx" loop="loop" autoplay="autoplay">
+		                <source src="img/mpx.mp3" type="audio/mpeg">
+		            </audio>
+		        </a>
+		</span>
+		
+		<!--页码-->
+		<div class="bodyConcent">
+			
+			<div class="page page1">
+			</div>
+			<div class="page page2"></div>
+			<div class="page page3"></div>
+			<div class="page page4">
+				<input class="page4Btn" type="button" value="下一页" onclick="nextPage()" />
+			</div>
+			<div class="page page5 bigPhoto">
+				<div class="pageTitle">
+					<img src="img/fileBigPersonTextTltle.png" />
+				</div>
+				<div class="conBox">
+					<img src="img/bigPerson.png">
+					<div class="inputBox" onclick="fileCip(0)" id="view"></div>
+					
+				</div>
+				<div class="pageFoot">
+					<img src="img/foorNextBtn.png" onclick="nextPage()" />
+				</div>
+			</div>
+			<div class="page page6">
+				<div class="pageTitle">
+					<img src="img/foorNextBtn.png" />
+				</div>
+				<div class="conBox">
+					<img src="img/kleinePerson.png">
+					<div class="inputBox" onclick="fileCip(1)" id="view1"></div>
+				</div>
+				<div class="GenerationBtn">
+					<img src="img/GenerationBtn.png" onclick="nextPage()" />
+				</div>
+			</div>
+			<div class="page page7">
+				<div class="GeneraBox">
+					<img src="img/pageVs.png">
+					<div class="conBoxXour">
+						<div class="leftCb cbBox"><img src="img/lftCb.png"></div>
+						<div class="vsPersonD vsPerson"></div>
+						<div class="rightCb cbBox"><img src="img/rightCb.png"></div>
+					</div>
+					<div class="conBoxZour">
+						<div class="leftCb cbBox"><img src="img/lftCb.png"></div>
+						<div class="vsPersonX vsPerson"></div>
+						<div class="rightCb cbBox"><img src="img/rightCb.png"></div>
+					</div>
+				</div>
+				<div class="GeneraFoot">
+					<div class="GeneraText" id="fontSize">
+						<span>孩子们用独特的视角搜索世界</span>
+						<span>新奇的角度,好奇的眼</span>
+						<span>我们站在他们的身后</span>
+						<span>用温柔的耐心,记录这一刻</span>
+					</div>
+					<div class="weimaBox">
+						<img src="img/weima.png" />
+						<div class="wemaText"><span>"</span><span>陪</span><span>我</span><span>看</span><span>世</span><span>界</span><span>"</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<article class="htmleaf-container">
+			<div class="chipHeader"><span class="closeChip" onclick = "closeChip()">关闭</span>上传大人拍的照片</div>
+			<div id="clipArea" class="chipBox"></div>
+			<div class="inputBtnBox"> 
+				<input type="file" id="file">
+				<div class="fileJong">选择图片</div>
+				<button id="clipBtn">截取</button> 
+			</div>
+		</article>
+		
+		<article class="htmleaf-container">
+			<div class="chipHeader"><span class="closeChip" onclick = "closeChip()">关闭</span>上传孩子拍的照片</div>
+			<div id="clipArea1" class="chipBox"></div>
+			<div class="inputBtnBox"> 
+				<input type="file" id="file1">
+				<div class="fileJong">选择图片</div>
+				<button id="clipBtn1">截取</button>
+			</div>
+		</article>
+	</body>
+</html>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
+<script type="text/javascript" src="js/hammer.js"></script>
+<script type="text/javascript" src="js/iscroll-zoom.js" ></script>
+<script type="text/javascript" src="js/jquery.photoClip.js" ></script>
+<script>
+stopDrop()
+
+function stopDrop() {
+    var lastY;//最后一次y坐标点
+    $(document.body).on('touchstart', function(event) {
+        lastY = event.originalEvent.changedTouches[0].clientY;//点击屏幕时记录最后一次Y度坐标。
+    });
+    $(document.body).on('touchmove', function(event) {
+        var y = event.originalEvent.changedTouches[0].clientY;
+        var st = $(this).scrollTop(); //滚动条高度  
+        if (y >= lastY && st <= 10) {//如果滚动条高度小于0，可以理解为到顶了，且是下拉情况下，阻止touchmove事件。
+            lastY = y;
+            event.preventDefault();
+        }
+        lastY = y;
+ 
+    });
+}
+
+
+	
+	var font_size = document.getElementById("fontSize");
+	var font_span = font_size.querySelectorAll("span");
+	var chipBox =document.querySelectorAll(".chipBox");
+	var conBoxXour = document.querySelector(".conBoxXour");
+	var conBoxZour = document.querySelector(".conBoxZour");
+	var inputBox = document.querySelectorAll(".inputBox");
+	//初始化计算 
+	window.onload = function (){
+		alert(document.body.clientHeight)
+		for( var i = 0 ; i < chipBox.length ; i ++){
+			chipBox[i].style.height = document.body.clientHeight-80+"px";
+		}
+		
+		for( var i = 0 ; i < inputBox.length ; i++ ){
+			inputBox[i].style.width = document.body.clientWidth*0.52+"px";
+			inputBox[i].style.height = document.body.clientWidth*0.52+"px";
+		}
+		
+		if(document.body.clientWidth<=360){
+			font_size.style.fontSize = "12px";
+			for( var i = 0 ; i < font_span.length ; i ++ ){
+				font_span[i].style.letterSpacing = "2px";
+			}
+		}
+		
+		conBoxXour.style.width = document.body.clientWidth*0.4+"px";
+		conBoxXour.style.height = document.body.clientWidth*0.4+"px";
+		//conBoxXour.style.marginTop = -document.body.clientHeight/2.9+"px"
+		conBoxZour.style.width = document.body.clientWidth*0.4+"px";
+		conBoxZour.style.height = document.body.clientWidth*0.4+"px";
+	}
+
+	//音乐播放器
+	var mc_play = document.getElementById("mc_play");
+	var musicfx = document.getElementById("musicfx");
+	mc_play.dataset.play = 0 ;
+	
+	//滑动特效 
+	var sensitive = 5; //灵敏度 越大越灵敏
+	var showPage = 0; //页数 
+	var startY = 0; //记录初始和结束
+	var moveY = 0;
+	var bodyHeight = document.body.clientHeight; //body高度
+	var bodyConcent = document.querySelector(".bodyConcent");
+	var concentPage = bodyConcent.querySelectorAll(".page");
+	var lopc = false;
+	var maxDist = (concentPage.length-1) * bodyHeight;
+	var timer = null;
+	bodyConcent.dataset.dist = 0;
+	
+	var fn = {
+		start:function ( event ){
+			if(event.targetTouches.length == 1){
+				var Touch = event.targetTouches[0];
+				startY = Touch.pageY;
+				console.log(new Date)
+				timer = setTimeout(function(){
+					canvasImg();
+				},1000)
+			}else{
+				return false;
+			}
+		},
+		move:function ( event ){
+			clearTimeout(timer)
+			var Touch = event.targetTouches[0];
+			moveY = Touch.pageY;
+			//console.log(moveY)
+		},
+		end:function ( event ){
+			if(moveY == 0){
+				return false;
+			}else{
+				var Touch = event.targetTouches[0];
+				if( Math.abs(moveY-startY) > bodyHeight/sensitive){
+					fn.silde(startY-moveY)
+				}else{
+					return false;
+				}
+			}
+		},
+		silde:function( posNeg ){
+			var diff;
+			if(posNeg<0){
+				//上滑动
+				if(bodyConcent.dataset.dist == 0){
+					return false;
+				}else{
+					showPage++;
+					diff = showPage*bodyHeight;
+				}
+			}else if(posNeg>0){
+				//下滑动
+				if(Math.abs(bodyConcent.dataset.dist-bodyHeight) > maxDist ){
+					return false;
+				}else{
+					showPage--;
+					diff = showPage*bodyHeight;
+				}
+			}
+			
+			fn.animation(diff);
+		},
+		animation:function ( diff ){
+			bodyConcent.style.webkitTransform="translate3d(0,"+diff+"px,0)";
+			bodyConcent.style.transform="translate3d(0,"+diff+"px,0)";
+			bodyConcent.dataset.dist = diff;
+			moveY = 0;
+		}
+	}
+
+	bodyConcent.addEventListener("touchstart",fn.start,false);
+	bodyConcent.addEventListener("touchmove",fn.move,false);
+	bodyConcent.addEventListener("touchend",fn.end,false);
+	
+	//下一页 跳转
+	function nextPage(){
+		var diff;
+		showPage--;
+		diff = showPage*bodyHeight;
+		fn.animation(diff);
+	}
+	
+	//音乐播放器效果
+	function play_music(event){
+		if(mc_play.dataset.play == 0){
+			mc_play.className = "";
+			musicfx.pause()
+			mc_play.dataset.play = 1 ;
+		}else if(mc_play.dataset.play == 1){
+			mc_play.className = "on";
+			musicfx.play()
+			mc_play.dataset.play = 0 ;
+		}
+	}
+	
+	//选择图片裁剪 ( 大人 );
+	$("#clipArea").photoClip({
+		width: document.body.clientWidth,
+		height: document.body.clientWidth,
+		file: "#file",
+		view: "#view",
+		ok: "#clipBtn", 
+		loadStart: function() {
+			console.log("照片读取中");
+		},
+		loadComplete: function() {
+			console.log("照片读取完成");
+		},
+		clipFinish: function(dataURL) {
+			console.log("路径提取成功");
+			var vsPersonD = document = document.querySelector(".vsPersonD");
+			vsPersonD.innerHTML = "";
+			var Img = document.createElement("img");
+			Img.src= dataURL;
+			$.post('2.php',{imgBase64:dataURL},function(data){
+			console.log(data);
+			 
+			});
+			vsPersonD.appendChild(Img);
+		} 
+	});
+	
+	//选择图片裁剪 ( 孩子 );
+	$("#clipArea1").photoClip({
+		width: document.body.clientWidth,
+		height: document.body.clientWidth,
+		file: "#file1",
+		view: "#view1",
+		ok: "#clipBtn1",
+		loadStart: function() {
+			console.log("照片读取中");
+		},
+		loadComplete: function() {
+			console.log("照片读取完成");
+		},
+		clipFinish: function(dataURL) {
+			console.log("路径提取成功");
+			var vsPersonX = document = document.querySelector(".vsPersonX");
+			vsPersonX.innerHTML = "";
+			var Img = document.createElement("img");
+			Img.src= dataURL;
+			vsPersonX.appendChild(Img);
+		}
+	});
+	
+	//隐藏裁剪
+	function closeChip(){
+		$(".htmleaf-container").fadeOut();
+	}
+	
+	//显示裁剪
+	function fileCip( per ){
+		$(".htmleaf-container").eq(per).fadeIn();
+	}
+	
+	//canvas 创建并下载图片
+	function canvasImg(){
+		var canvas = document.createElement("canvas");
+		canvas.id = "canvas";
+		canvas.width=window.innerWidth;
+            canvas.height=window.innerHeight;
+		document.body.appendChild(canvas);
+		var dd = getImageData(0,0,window.innerWidth,window.innerHeight);
+		console.log(dd)
+	}
+</script>

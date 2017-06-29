@@ -1,0 +1,34 @@
+
+1、我的礼品
+
+SELECT
+			l.id AS 'id',
+			l.linename AS 'linename',
+      lgl.line_id,
+      lgl.gift_id,
+      lg.supplier_id,
+      lgm.member_id
+		FROM
+			u_line AS l
+		LEFT JOIN luck_gift_line AS lgl ON l.id = lgl.line_id
+    LEFT JOIN luck_gift AS lg ON lgl.gift_id = lg.id
+    LEFT JOIN u_supplier AS s ON lg.supplier_id = s.id
+    LEFT JOIN luck_gift_member AS lgm ON lg.id = lgm.gift_id
+where lgl.gift_id=4 and lgm.member_id=17 and lgl.STATUS = 1
+
+2、摇一摇是否有礼品
+
+SELECT * from luck_gift_line as lgl LEFT JOIN u_line as ul on lgl.line_id=ul.id where lgl.status='1' and ul.status='2' 
+
+3、注册送优惠券：配置
+SELECT ca.id as id,ca.action_code as action_code,cac.coupon_id as coupon_id,cac.number as number,cc.name as name,cc.coupon_price as coupon_price from cou_action as ca LEFT JOIN cou_action_coupon as cac on ca.id=cac.action_id LEFT JOIN cou_coupon as cc on cac.coupon_id=cc.id where ca.action_code='REGISTER'
+
+4、合并
+select (select GROUP_CONCAT(d.kindname) as expert_dest from u_destinations as d where FIND_IN_SET(d.id,e.expert_dest)) as expert_dest from u_expert as e where e.id='175' 
+
+5、两表连接
+select crt.id,d.kindname from (select * from cfg_round_trip where startplaceid='235')crt left join (select * from u_destinations)d on d.id=crt.neighbor_id
+
+
+6、上线的且有游记的线路
+select n.*,l.id as lineid from travel_note as n left join u_line as l on l.id=n.line_id where n.is_show=1 and n.`status`=1 and l.`status`=2

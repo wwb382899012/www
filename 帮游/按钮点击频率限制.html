@@ -1,0 +1,48 @@
+<script type="text/javascript">
+    //存储变量信息
+    var VAR ={
+        repeatTemp:[]
+    }
+	//获取毫秒级时间戳
+    function microtime(){
+
+        return new Date().getTime();
+    }  
+    var COM = {
+        repeat:function(s,t){//限制执行频率，默认为60秒 允许执行时返回false
+            t = t ? t * 1000 : 4000;//毫秒
+            var time = microtime();
+                if(!VAR.repeatTemp[s]){
+                    VAR.repeatTemp[s] = time;
+                    return false;//允许
+                }else{
+                    var ts = t - (time - VAR.repeatTemp[s]);
+                    ts = parseInt(ts/1000);
+                if(ts > 0){
+                    alert("频率限制：还有 <b>"+ ts +"</b> 秒才可以再执行！");
+                    return true;//禁止执行
+                }else{
+
+                    VAR.repeatTemp[s] = time;//更新时间
+                    return false;//允许
+                }
+            }
+        }
+    }
+
+    //刷新
+    function ref(){
+        var btn = COM.repeat('btn');
+        if(!btn){alert("可以执行了！");}
+    }
+
+
+    
+
+	
+	
+
+  </script>
+  
+  
+  <input type="button" onclick="ref();" value="提交"/>
